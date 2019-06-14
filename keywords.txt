@@ -1,0 +1,9 @@
+SimpleRotary		KEYWORD1
+rotate				KEYWORD2
+push				KEYWORD2
+pushTime			KEYWORD2
+pushLong			KEYWORD2
+setTrigger			KEYWORD2
+setDebounceDelay	KEYWORD2
+setErrorDelay		KEYWORD2
+resetPush			KEYWORD2
