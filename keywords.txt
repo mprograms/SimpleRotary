@@ -3,6 +3,7 @@ rotate				KEYWORD2
 push				KEYWORD2
 pushTime			KEYWORD2
 pushLong			KEYWORD2
+pushType			KEYWORD2
 setTrigger			KEYWORD2
 setDebounceDelay	KEYWORD2
 setErrorDelay		KEYWORD2

@@ -11,6 +11,7 @@ class SimpleRotary
     byte push();
 	int pushTime();
 	byte pushLong(int i);
+	byte pushType(int i);
     void setTrigger(byte i);
     void setDebounceDelay(int i);
     void setErrorDelay(int i);
@@ -29,6 +30,7 @@ class SimpleRotary
     unsigned int _debounceSDelay = 200;
 	bool _pulse = false;
 	bool _pushStatus = false;
+	bool _btnPressed = false;
 	unsigned long _errorTime;
     unsigned int _errorDelay = 100;	
     byte _errorLast = 0;

@@ -154,6 +154,31 @@ void loop(){
 }
 ```
 
+#### Getting Short & Long Button Pushes Together
+There are times where you may want to use both short and long presses together, such as in a menu system. In these cases use `pushType(n);` Where n is the number of milliseconds you want a long press to be.
+
+Calling `push();` and `pushLong(n);` will not work in these cases because `push();` generates a return output on button press, resulting in invalid results. Using `pushType(n);` generates return output for a short press only on button release.
+
+This function will return a single byte of three possible values:
+
+- 0 - Button was not pushed.
+- 1 - Button was short pushed.
+- 2 - Button was long pushed.
+
+```
+void loop(){
+	int t = rotary.pushType();
+	// Short Push
+	if ( t == 1 ) {
+		// Do something cool.
+	}
+	//Long push
+	if ( t == 2 ) {
+		// Do something cool.
+	}
+}
+```
+
 ---
 
 ## Example Sketch

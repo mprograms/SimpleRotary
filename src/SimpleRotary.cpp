@@ -211,6 +211,7 @@ void SimpleRotary::resetPush(){
 	_pushTime = _currentTime;
 }
 
+
 /**
 	GET LONG BUTTON PUSH
 	Checks to see if the button has been held down for (n) milliseconds.
@@ -230,7 +231,6 @@ void SimpleRotary::resetPush(){
 	
 	@return byte
 **/
-
 byte SimpleRotary::pushLong(int i) {
 	unsigned int time = pushTime();
 	byte val = 0x00;
@@ -241,6 +241,60 @@ byte SimpleRotary::pushLong(int i) {
 	}
 	return val;
 }
+
+
+/**
+	GET BUTTON PUSH TYPE
+	Checks to see if the button push is a short or long push
+	
+	Note: Unlike push(), pushType() generates a return value for a short press only on button release. This allows us to track a long press without a false positive of a short press. It is for this reason that you should use this function if you are tying to check for a long or short press in the same function.
+
+	Returned values
+	0x00 = Button not pressed.
+	0x01 = Button was pressed.
+	0x00 = Button was pressed for n milliseconds.
+	
+	@param i, int, the number of milliseconds the button needs to be pressed in order
+				   to be considered a long press.
+	
+	@since v1.1.0;
+	
+	@return byte
+**/
+byte SimpleRotary::pushType(int i = 1000){
+	_updateTime();
+	_statusS = ( digitalRead(_pinS) == _trigger ) ? true : false;
+	byte val = 0x00;
+
+	if ( _currentTime >= _debounceSTime + _debounceSDelay ){
+	
+		// Button has been pressed
+		if ( !_statusS && _statusS_prev ) {
+			_btnPressed = true;
+			_pushTime = _currentTime;
+		}
+		
+		// Button has been released
+		if ( _statusS && !_statusS_prev  && _btnPressed ) {
+			_btnPressed = false;
+			val = 0x01;
+		}
+		// Button is being held
+		if ( !_statusS && !_statusS_prev && _btnPressed) {
+			if ( _currentTime > _pushTime + i ) {
+				_btnPressed = false;
+				val = 0x02;
+			}
+		}
+		
+		_statusS_prev = _statusS;
+		_debounceSTime = _currentTime;
+	}
+	
+	
+	return val; 
+}
+
 
 
 
