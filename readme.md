@@ -167,7 +167,7 @@ This function will return a single byte of three possible values:
 
 ```
 void loop(){
-	int t = rotary.pushType();
+	byte t = rotary.pushType();
 	// Short Push
 	if ( t == 1 ) {
 		// Do something cool.
