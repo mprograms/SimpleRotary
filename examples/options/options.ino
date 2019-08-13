@@ -13,25 +13,30 @@ Release under the GNU General Public License v3
 #include <SimpleRotary.h>
 
 // Pin A, Pin B, Button Pin
-SimpleRotary rotary(6,5,7);
+SimpleRotary rotary(2,3,4);
 
+byte y =0;
   
 
 void setup() {
 
   // Set the trigger to be either a HIGH or LOW pin (Default: HIGH)
   // Note this sets all three pins to use the same state.
-  rotary.setTrigger(HIGH)
+  rotary.setTrigger(HIGH);
 
   // Set the debounce delay in ms  (Default: 2)
-  rotary.setDebounceDelay(5)
+  rotary.setDebounceDelay(5);
 
   // Set the error correction delay in ms  (Default: 200)
-  rotary.setErrorDelay(250)
+  rotary.setErrorDelay(250);
+  Serial.begin(9600);
 }
 
 void loop() {
   byte i;
   i = rotary.rotate();
-  Serial.println(i);
+  if (i!=y){
+      Serial.println(i);
+      y=i;
+  }
 }
