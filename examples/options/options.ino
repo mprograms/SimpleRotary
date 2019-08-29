@@ -21,17 +21,22 @@ void setup() {
 
   // Set the trigger to be either a HIGH or LOW pin (Default: HIGH)
   // Note this sets all three pins to use the same state.
-  rotary.setTrigger(HIGH)
+  rotary.setTrigger(HIGH);
 
   // Set the debounce delay in ms  (Default: 2)
-  rotary.setDebounceDelay(5)
+  rotary.setDebounceDelay(5);
 
   // Set the error correction delay in ms  (Default: 200)
-  rotary.setErrorDelay(250)
+  rotary.setErrorDelay(250);
+  Serial.begin(9600);
 }
 
 void loop() {
   byte i;
   i = rotary.rotate();
-  Serial.println(i);
+  
+  // Only print CW / CCW output to prevent an endless stream of output.
+  if ( i == 1 || i == 2) {
+    Serial.println(i);
+  }
 }

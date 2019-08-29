@@ -1,6 +1,6 @@
 # SimpleRotary Arduino Library
 
-by [MRPrograms](https://github.com/mprograms/)
+by [MPrograms](https://github.com/mprograms/)
 | 
 [Github Project Page](https://github.com/mprograms/SimpleRotary/)
 
@@ -293,7 +293,7 @@ void setup(){
 ### Rotation Gives Backwards Reading or Only Goes CW / CCW
 
 - Check to see if your rotary encoder pins are not reversed either in actual wiring or defined pins in the `rotary(A, B, Button);` initialization.
-- Check to make sure you are using the correct pinout of your rotary encoder. Different manufacturers use different pinouts. Two of the most common are listed above under Rotary Hookup Reference. If neither of these works, you may have to probe each pin to discover the pinout.
+- Check to make sure you are using the correct pinout of your rotary encoder. Different manufacturers use different pinouts.
 
 ### Unreliable Rotation Readings While Using Serial.print()
 
@@ -301,3 +301,10 @@ Calling Serial.print() too quickly can cause pulses from the rotary encoder to b
 
 - Limit your calls to Serial.print() on rotation / button press.
 - Place a delay between Serial.print()'s to allow the pulses to keep up.
+
+### Unreliable Rotation Readings While Using LCD
+
+Refreshing or rewriting your LCD too often can result in missed pulses from the rotary encoder when it is turning at higher speeds. This is caused by the extra time it takes the LCD to completely rewrite. There are a couple options to fixing this issue.
+
+- Don't rewrite the entire lcd screen each time there is a pulse from the rotary encoder. Only update the part of the screen that is required.
+- Use a short delay to update the lcd after (n) milliseconds.
