@@ -116,7 +116,7 @@ byte SimpleRotary::rotate()
     _statusB = ( digitalRead(_pinB) == _trigger ? true : false);
 	 
     if( !_statusA && _statusA_prev ){
-
+	  
       if ( _statusB != _statusA ) {
         _dir = 0x01;
       } else {
@@ -265,13 +265,17 @@ byte SimpleRotary::pushType(int i = 1000){
 	_updateTime();
 	_statusS = ( digitalRead(_pinS) == _trigger ) ? true : false;
 	byte val = 0x00;
+	if ( !_statusS ) {
+	   val = 0x04;
+	}
 
 	if ( _currentTime >= _debounceSTime + _debounceSDelay ){
-	
+		
 		// Button has been pressed
 		if ( !_statusS && _statusS_prev ) {
 			_btnPressed = true;
 			_pushTime = _currentTime;
+			val = 0x03;
 		}
 		
 		// Button has been released
@@ -286,6 +290,7 @@ byte SimpleRotary::pushType(int i = 1000){
 				val = 0x02;
 			}
 		}
+			
 		
 		_statusS_prev = _statusS;
 		_debounceSTime = _currentTime;
