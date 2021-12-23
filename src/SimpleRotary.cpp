@@ -261,7 +261,7 @@ byte SimpleRotary::pushLong(int i) {
 	
 	@return byte
 **/
-byte SimpleRotary::pushType(int i = 1000){
+byte SimpleRotary::pushType(int i){
 	_updateTime();
 	_statusS = ( digitalRead(_pinS) == _trigger ) ? true : false;
 	byte val = 0x00;

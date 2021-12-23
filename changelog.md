@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.3]
+### Fixed 
+- Removed default parameter value for pushType(). The function pushType() already requires a parameter so the default is redundant.
+
+### Changed
+- readme.md changed pushType() function documentation to make it clearer that a parameter is required.
+
 ## [v1.1.2]
 ### Fixed
 - Typo in library.properties.
